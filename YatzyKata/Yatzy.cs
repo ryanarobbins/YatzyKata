@@ -2,7 +2,7 @@
 {
     public static class Yatzy
     {
-        static Dictionary<string, int> numberCategories = new()
+        static readonly Dictionary<string, int> _numberCategories = new()
         {
             {"ONES", 1 },
             {"TWOS", 2 },
@@ -26,8 +26,17 @@
                 }
                 return 0;
             }
+            if(category == "PAIR")
+            {
+                var counts = roll.GroupBy(x => x);
+                var pairs = counts.Where(x => x.Count() >= 2);
+                var sumPair = pairs.FirstOrDefault(s => s.Key == pairs.Max(x => x.Key));
+                var score = sumPair?.Sum();
+
+                return score ?? 0;
+            }
             
-            int? numberToScore = numberCategories.ContainsKey(category) ? numberCategories[category] : null;
+            int? numberToScore = _numberCategories.ContainsKey(category) ? _numberCategories[category] : null;
             if (numberToScore != null)
                 return ScoreNumberCategory(roll, numberToScore.Value);
             
