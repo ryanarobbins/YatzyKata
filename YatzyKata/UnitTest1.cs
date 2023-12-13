@@ -82,5 +82,47 @@ namespace YatzyKata
             var roll = new List<int> { 1, 2, 3, 4, 5 };
             Assert.That(Yatzy.Score(roll, "PAIR"), Is.EqualTo(0));
         }
+
+        [Test]
+        public void ThreeOfAKindGetsScoredCorrectlyWhenThereIsNotThreeOfAKind()
+        {
+            var roll = new List<int> { 1, 1, 3, 4, 5 };
+            Assert.That(Yatzy.Score(roll, "THREEOFAKIND"), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ThreeOfAKindGetsScoredCorrectlyWhenOneSetExists()
+        {
+            var roll = new List<int> { 1, 1, 1, 4, 5 };
+            Assert.That(Yatzy.Score(roll, "THREEOFAKIND"), Is.EqualTo(12));
+        }
+
+        [Test]
+        public void FourOfAKindGetsScoredCorrectlyWhenThereIsNotFourOfAKind()
+        {
+            var roll = new List<int> { 1, 1, 1, 4, 5 };
+            Assert.That(Yatzy.Score(roll, "FOUROFAKIND"), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void FourOfAKindGetsScoredCorrectlyWhenOneSetExists()
+        {
+            var roll = new List<int> { 1, 1, 1, 1, 5 };
+            Assert.That(Yatzy.Score(roll, "FOUROFAKIND"), Is.EqualTo(9));
+        }
+
+        [Test]
+        public void FullHouseWhenThereIsAFullHouse()
+        {
+            var roll = new List<int> { 1, 1, 1, 2, 2 };
+            Assert.That(Yatzy.Score(roll, "FULLHOUSE"), Is.EqualTo(25));
+        }
+
+        [Test]
+        public void FullHouseWhenThereIsNotAFullHouse()
+        {
+            var roll = new List<int> { 1, 1, 3, 2, 2 };
+            Assert.That(Yatzy.Score(roll, "FULLHOUSE"), Is.EqualTo(0));
+        }
     }
 }
