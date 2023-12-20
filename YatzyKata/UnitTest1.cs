@@ -6,22 +6,25 @@ namespace YatzyKata
         [Test]
         public void ChanceWillSumAllDice()
         {
-            var roll = new List<int> { 1,2,3,4,5 };
-            Assert.That(Yatzy.Score(roll, "CHANCE"), Is.EqualTo(1+2+3+4+5));
+            var roll = new List<int> { 1, 2, 3, 4, 5 };
+            var play = new Play(roll, ScoreCategory.Chance);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(1 + 2 + 3 + 4 + 5));
         }
 
         [Test]
         public void YatzyGivesFiftyPoints()
         {
             var roll = new List<int> { 1, 1, 1, 1, 1 };
-            Assert.That(Yatzy.Score(roll, "YATZY"), Is.EqualTo(50));
+            var play = new Play(roll, ScoreCategory.Yatzy);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(50));
         }
 
         [Test]
         public void NotAYatzyInYatzyGivesZeroPoints()
         {
             var roll = new List<int> { 1, 1, 1, 2, 1 };
-            Assert.That(Yatzy.Score(roll, "YATZY"), Is.EqualTo(0));
+            var play = new Play(roll, ScoreCategory.Yatzy);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
         }
 
         [Test]
@@ -35,80 +38,90 @@ namespace YatzyKata
         public void OnesAddsUpTheOnesV2()
         {
             var roll = new List<int> { 1, 1, 3, 1, 1 };
-            Assert.That(Yatzy.Score(roll, "ONES"), Is.EqualTo(4));
+            var play = new Play(roll, ScoreCategory.Ones);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(4));
         }
 
         [Test]
         public void TwosAddsUpTheTwos()
         {
             var roll = new List<int> { 2, 1, 3, 2, 2 };
-            Assert.That(Yatzy.Score(roll, "TWOS"), Is.EqualTo(6));
+            var play = new Play(roll, ScoreCategory.Twos);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(6));
         }
 
         [Test]
         public void ThreesAddsUpTheThrees()
         {
             var roll = new List<int> { 2, 1, 3, 3, 2 };
-            Assert.That(Yatzy.Score(roll, "THREES"), Is.EqualTo(6));
+            var play = new Play(roll, ScoreCategory.Threes);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(6));
         }
 
         [Test]
         public void OtherNumberCategories()
         {
             var roll = new List<int> { 4, 4, 5, 6, 6 };
-            Assert.That(Yatzy.Score(roll, "FOURS"), Is.EqualTo(8));
-            Assert.That(Yatzy.Score(roll, "FIVES"), Is.EqualTo(5));
-            Assert.That(Yatzy.Score(roll, "SIXES"), Is.EqualTo(12));
-            Assert.That(Yatzy.Score(roll, "THREES"), Is.EqualTo(0));
+            Assert.That(Yatzy.Score(new Play(roll, ScoreCategory.Fours)), Is.EqualTo(8));
+            Assert.That(Yatzy.Score(new Play(roll, ScoreCategory.Fives)), Is.EqualTo(5));
+            Assert.That(Yatzy.Score(new Play(roll, ScoreCategory.Sixes)), Is.EqualTo(12));
+            Assert.That(Yatzy.Score(new Play(roll, ScoreCategory.Threes)), Is.EqualTo(0));
         }
 
         [Test]
         public void OnePairGetScoredCorrectly()
         {
             var roll = new List<int> { 2, 1, 4, 3, 2 };
-            Assert.That(Yatzy.Score(roll, "PAIR"), Is.EqualTo(4));
+            var play = new Play(roll, ScoreCategory.Pair);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(4));
         }
 
         [Test]
         public void OnePairGetScoredCorrectlyWhenThereAreTwoPairs()
         {
             var roll = new List<int> { 2, 1, 6, 6, 2 };
-            Assert.That(Yatzy.Score(roll, "PAIR"), Is.EqualTo(12));
+            var play = new Play(roll, ScoreCategory.Pair);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(12));
         }
 
         [Test]
         public void OnePairGetScoredCorrectlyWhenThereAreNoPairs()
         {
             var roll = new List<int> { 1, 2, 3, 4, 5 };
-            Assert.That(Yatzy.Score(roll, "PAIR"), Is.EqualTo(0));
+            var play = new Play(roll, ScoreCategory.Pair);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
         }
 
         [Test]
         public void ThreeOfAKindGetsScoredCorrectlyWhenThereIsNotThreeOfAKind()
         {
             var roll = new List<int> { 1, 1, 3, 4, 5 };
-            Assert.That(Yatzy.Score(roll, "THREEOFAKIND"), Is.EqualTo(0));
+            var play = new Play(roll, ScoreCategory.ThreeOfAKind);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
         }
 
         [Test]
         public void ThreeOfAKindGetsScoredCorrectlyWhenOneSetExists()
         {
             var roll = new List<int> { 1, 1, 1, 4, 5 };
-            Assert.That(Yatzy.Score(roll, "THREEOFAKIND"), Is.EqualTo(12));
+            var play = new Play(roll, ScoreCategory.ThreeOfAKind);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(12));
         }
 
         [Test]
         public void FourOfAKindGetsScoredCorrectlyWhenThereIsNotFourOfAKind()
         {
             var roll = new List<int> { 1, 1, 1, 4, 5 };
-            Assert.That(Yatzy.Score(roll, "FOUROFAKIND"), Is.EqualTo(0));
+            var play = new Play(roll, ScoreCategory.FourOfAKind);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
         }
 
         [Test]
         public void FourOfAKindGetsScoredCorrectlyWhenOneSetExists()
         {
             var roll = new List<int> { 1, 1, 1, 1, 5 };
-            Assert.That(Yatzy.Score(roll, "FOUROFAKIND"), Is.EqualTo(9));
+            var play = new Play(roll, ScoreCategory.FourOfAKind);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(9));
         }
 
         [Test]
