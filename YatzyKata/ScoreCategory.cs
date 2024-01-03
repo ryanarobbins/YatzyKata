@@ -12,6 +12,9 @@
         Sixes,
         Pair,
         ThreeOfAKind,
-        FourOfAKind
+        FourOfAKind,
+        FullHouse,
+        SmallStraight,
+        LargeStraight
     }
 }

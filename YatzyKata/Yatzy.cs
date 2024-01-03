@@ -2,16 +2,6 @@
 {
     public static class Yatzy
     {
-        static readonly Dictionary<string, int> _oldNumberCategories = new()
-        {
-            {"ONES", 1 },
-            {"TWOS", 2 },
-            {"THREES", 3 },
-            {"FOURS", 4 },
-            {"FIVES", 5 },
-            {"SIXES", 6 },
-        };
-
         static readonly Dictionary<ScoreCategory, int> _numberCategories = new()
         {
             {ScoreCategory.Ones, 1 },
@@ -24,16 +14,25 @@
 
         public static int Score(Play play)
         {
+            var finalScore = 0;
+            switch (play.Category)
+            {
+                case ScoreCategory.Yatzy:
+                    {
+                        if (play.Roll.Distinct().Count() == 1)
+                        {
+                            finalScore = 50;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+            if (finalScore != 0) { return finalScore; }
             if (play.Category == ScoreCategory.Chance)
                 return play.Roll.Sum();
-            if (play.Category == ScoreCategory.Yatzy)
-            {
-                if (play.Roll.Distinct().Count() == 1)
-                {
-                    return 50;
-                }
-                return 0;
-            }
+
             if (play.Category == ScoreCategory.Pair)
             {
                 var counts = play.Roll.GroupBy(x => x);
@@ -51,72 +50,38 @@
             {
                 return ScoreSetCategory(play.Roll, 4);
             }
-
-            int? numberToScore = _numberCategories.ContainsKey(play.Category) ? _numberCategories[play.Category] : null;
-            if (numberToScore != null)
-                return ScoreNumberCategory(play.Roll, numberToScore.Value);
-
-            return -1;
-        }
-
-        public static int Score(List<int> roll, string category)
-        {
-            if (category == "CHANCE")
+            if (play.Category == ScoreCategory.FullHouse)
             {
-                Play play = new(roll, ScoreCategory.Chance);               
-                return Score(play);
-            }
-            if (category == "YATZY")
-            {
-                Play play = new(roll, ScoreCategory.Yatzy);
-                return Score(play);
-            }
-            
-            if (category == "FULLHOUSE")
-            {
-                var counts = roll.GroupBy(x => x);
+                var counts = play.Roll.GroupBy(x => x);
                 var pair = counts.Where(x => x.Count() == 2).FirstOrDefault();
                 var set = counts.Where(x => x.Count() == 3).FirstOrDefault();
                 if (pair != null && set != null)
                 {
                     return 25;
                 }
-                return 0;
+            }
+            if (play.Category == ScoreCategory.SmallStraight)
+            {
+                var expected = new List<int> { 1, 2, 3, 4, 5 };
+                if (expected.All(play.Roll.Contains))
+                {
+                    return 15;
+                }
+            }
+            if (play.Category == ScoreCategory.LargeStraight)
+            {
+                var expected = new List<int> { 2, 3, 4, 5, 6 };
+                if (expected.All(play.Roll.Contains))
+                {
+                    return 20;
+                }
             }
 
-            if (category == "ONES")
-            {
-                Play play = new(roll, ScoreCategory.Ones);
-                return Score(play);
-            }
-            if (category == "TWOS")
-            {
-                Play play = new(roll, ScoreCategory.Twos);
-                return Score(play);
-            }
-            if (category == "THREES")
-            {
-                Play play = new(roll, ScoreCategory.Threes);
-                return Score(play);
-            }
-            if (category == "FOURS")
-            {
-                Play play = new(roll, ScoreCategory.Fours);
-                return Score(play);
-            }
-            if (category == "FIVES")
-            {
-                Play play = new(roll, ScoreCategory.Fives);
-                return Score(play);
-            }
-            if (category == "SIXES")
-            {
-                Play play = new(roll, ScoreCategory.Sixes);
-                return Score(play);
-            }
+            int? numberToScore = _numberCategories.ContainsKey(play.Category) ? _numberCategories[play.Category] : null;
+            if (numberToScore != null)
+                return ScoreNumberCategory(play.Roll, numberToScore.Value);
 
-
-            return -1;
+            return 0;
         }
 
         private static int ScoreSetCategory(List<int> roll, int setLength)

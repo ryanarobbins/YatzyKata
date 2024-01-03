@@ -31,7 +31,8 @@ namespace YatzyKata
         public void OnesAddsUpTheOnes()
         {
             var roll = new List<int> { 1, 1, 3, 2, 1 };
-            Assert.That(Yatzy.Score(roll, "ONES"), Is.EqualTo(3));
+            var play = new Play(roll, ScoreCategory.Ones);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(3));
         }
 
         [Test]
@@ -128,14 +129,40 @@ namespace YatzyKata
         public void FullHouseWhenThereIsAFullHouse()
         {
             var roll = new List<int> { 1, 1, 1, 2, 2 };
-            Assert.That(Yatzy.Score(roll, "FULLHOUSE"), Is.EqualTo(25));
+            var play = new Play(roll, ScoreCategory.FullHouse);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(25));
         }
 
         [Test]
         public void FullHouseWhenThereIsNotAFullHouse()
         {
             var roll = new List<int> { 1, 1, 3, 2, 2 };
-            Assert.That(Yatzy.Score(roll, "FULLHOUSE"), Is.EqualTo(0));
+            var play = new Play(roll, ScoreCategory.FullHouse);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void SmallStraightWhenAllDiceCountUp()
+        {
+            var roll = new List<int> { 1, 2, 3, 4, 5 };
+            var play = new Play(roll, ScoreCategory.SmallStraight);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(15));
+        }
+
+        [Test]
+        public void SmallStraightWhenAllDiceCountUpOutOfOrder()
+        {
+            var roll = new List<int> { 2, 1, 3, 4, 5, 6 };
+            var play = new Play(roll, ScoreCategory.SmallStraight);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(15));
+        }
+        
+        [Test]
+        public void SmallStraightWhenAllDiceDontCountUp()
+        {
+            var roll = new List<int> { 1, 1, 3, 4, 5 };
+            var play = new Play(roll, ScoreCategory.SmallStraight);
+            Assert.That(Yatzy.Score(play), Is.EqualTo(0));
         }
     }
 }
