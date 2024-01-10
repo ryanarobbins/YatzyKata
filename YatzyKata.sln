@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyKata", "YatzyKata\YatzyKata.csproj", "{E225C78D-2269-441D-91DD-802B2AAEBD90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YatzyTests", "YatzyKata\YatzyTests.csproj", "{E225C78D-2269-441D-91DD-802B2AAEBD90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YatzyScorer", "YatzyScorer\YatzyScorer.csproj", "{88E589E0-05C8-4737-898B-D6BCF55BCFEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyScoringEngine", "YatzyEngine\YatzyScoringEngine.csproj", "{D572F13A-59BB-4E17-B998-ED753948B154}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyGameEngine", "YatzyGameEngine\YatzyGameEngine.csproj", "{BC397A20-F418-4533-BEAF-8C97E24DDB6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{E225C78D-2269-441D-91DD-802B2AAEBD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E225C78D-2269-441D-91DD-802B2AAEBD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E225C78D-2269-441D-91DD-802B2AAEBD90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E589E0-05C8-4737-898B-D6BCF55BCFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E589E0-05C8-4737-898B-D6BCF55BCFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E589E0-05C8-4737-898B-D6BCF55BCFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E589E0-05C8-4737-898B-D6BCF55BCFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D572F13A-59BB-4E17-B998-ED753948B154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D572F13A-59BB-4E17-B998-ED753948B154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D572F13A-59BB-4E17-B998-ED753948B154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D572F13A-59BB-4E17-B998-ED753948B154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC397A20-F418-4533-BEAF-8C97E24DDB6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC397A20-F418-4533-BEAF-8C97E24DDB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC397A20-F418-4533-BEAF-8C97E24DDB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC397A20-F418-4533-BEAF-8C97E24DDB6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

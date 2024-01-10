@@ -1,4 +1,4 @@
-﻿namespace YatzyKata
+﻿namespace YatzyScoringEngine
 {
     public static class Yatzy
     {

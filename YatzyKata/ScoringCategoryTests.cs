@@ -1,7 +1,8 @@
+using YatzyScoringEngine;
+
 namespace YatzyKata
 {
-    // using mob tool
-    public class Tests
+    public class ScoringCategoryTests
     {
         [Test]
         public void ChanceWillSumAllDice()
